@@ -13,9 +13,22 @@ const contentSchema = new mongoose.Schema( {
     },
 
     useId : { 
-        type : Object,
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    },
+
+    type : {
+        type : String,
         require : true,
+    },
+
+    tags : {
+       type : mongoose.Schema.Types.Array,
+       ref : 'Tags'
     }
+
+
+
 
 })
 
