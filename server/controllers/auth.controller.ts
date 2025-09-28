@@ -46,15 +46,13 @@ export const Signup = async (req:Request<object,object, userDetails>, res: Respo
         const token = jwt.sign({userId: newUser[0]?._id}, JWT_SECRET, {expiresIn : '5hrs'});
         await session.commitTransaction();
         await session.endSession();
-        
-        
+          
         res.cookie('jwtToken', token, {
             httpOnly : true,
             secure : true,
             sameSite : "strict",
             maxAge : 18000000,
         })
-
 
         res.json({
             success : true,
@@ -66,8 +64,6 @@ export const Signup = async (req:Request<object,object, userDetails>, res: Respo
             }
         });
         
-
-
     }catch (error){
         console.log(error);
         await session.endSession();
