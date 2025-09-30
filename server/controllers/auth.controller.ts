@@ -4,14 +4,14 @@ import type { NextFunction, Request, Response } from "express";
 import bcrypt from 'bcryptjs';
 
 import jwt from 'jsonwebtoken'
+import { JWT_SECRET } from "../config/env";
 
 interface userDetails {
     email : string | null;
     password : string | null;
     username : string | null;
 }
-const JWT_SECRET = "dsfwr98yv3bcv.kb8485y3";
-export const Signup = async (req:Request<object,object, userDetails>, res: Response, next: NextFunction) => {
+export const signUp = async (req:Request<object,object, userDetails>, res: Response, next: NextFunction) => {
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -43,7 +43,7 @@ export const Signup = async (req:Request<object,object, userDetails>, res: Respo
             return;
         }
 
-        const token = jwt.sign({userId: newUser[0]?._id}, JWT_SECRET, {expiresIn : '5hrs'});
+        const token = jwt.sign({userId: newUser[0]?._id}, JWT_SECRET as string, {expiresIn : '5hrs'});
         await session.commitTransaction();
         await session.endSession();
           
@@ -70,7 +70,6 @@ export const Signup = async (req:Request<object,object, userDetails>, res: Respo
         next(error);
     }
 }
-
 
 // export const Signin = async (req,res,next) => {
 

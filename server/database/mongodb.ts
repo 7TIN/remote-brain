@@ -1,22 +1,18 @@
 
 import mongoose from "mongoose";
+import { DATABASE_URL } from "../config/env";
 
-const url = "fakeUrl"
-const connectDb = async () => {
+const connectToDb = async () => {
 
     try{
-        await mongoose.connect(url);
-        console.log("connected succfully");
+        await mongoose.connect(DATABASE_URL as string);
+        console.log("connected successfully");
     }catch(error){
         console.log(error);
         process.exit(1);
     }
-
     // mongoose.connect(url, {
-
     // })
-
 }
 
-
-export default connectDb
+export default connectToDb;
