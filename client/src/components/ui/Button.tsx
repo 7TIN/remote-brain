@@ -1,13 +1,14 @@
 // import type { ReactNode } from "react";
 import type React from "react"
 import { cn } from "../../lib/utils";
+import type { ReactNode } from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     variant? : "primary" | "secondary";
     size? : "sm" | "md" | "lg";
     text? : string;
     className : string;
-    icon? : SVGElement;
+    icon? : ReactNode;
     onClick? : () => void;
 }
 
@@ -28,8 +29,8 @@ const Button = (
     props: ButtonProps
 ) =>  {
     return (
-        <button className={cn(variantStyles[props.variant ?? "default"], sizeStyles[props.size ?? "sm"] ,props.className)}>
-            {props.text}
+        <button className={cn(variantStyles[props.variant ?? "default"], sizeStyles[props.size ?? "sm"], props.className)}>
+            {props.icon}{props.text}
         </button>
     )
 }
