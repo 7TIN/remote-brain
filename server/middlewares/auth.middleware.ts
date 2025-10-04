@@ -9,6 +9,9 @@ import User from "../models/user.model";
 //     userId : 'string | JwtPayload';
 // }
 
+interface AuthPayload extends JwtPayload {
+  userId: string;
+}
 
 const authorize = async(req: Request, res: Response, next: NextFunction ) => {
      try {
@@ -16,16 +19,23 @@ const authorize = async(req: Request, res: Response, next: NextFunction ) => {
         const token = req.headers['authorization'];
 
         if (!token) {
-            res.status(401).json({message : "Unauthorize : no token", success : false})
+            return res.status(401).json({message : "Unauthorize : no token", success : false})
         }
 
-        const decoded = jwt.verify(token as string,JWT_SECRET as string) as JwtPayload;
+        const decoded = jwt.verify(token ,JWT_SECRET as string);
+        if (typeof decoded !== "object" || !("userId" in decoded)) {
+      return res.status(401).json({ message: "Invalid token payload", success: false });
+    }
 
-        const user = await User.findById(decoded.userId).select('-password');
+        const { userId } = decoded as AuthPayload;
+
+        const user = await User.findById(userId).select('-password');
 
         if (!user) {
             return res.status(401).json({success: false, message: 'Unauthorized: user not found' });
         }
+
+        req.userId = user._id.toString();
 
         res.locals.user = user;
         next();

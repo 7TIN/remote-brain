@@ -8,22 +8,32 @@ const contentTypes = ['image', 'video', 'article', 'audio'] as const;
 export const zodContentSchema = z.object({
   link: z.string().min(1, "Link is required"),
   title: z.string().min(1, "Title is required"),
-  useId: z.string().regex(/^[a-fA-F0-9]{24}$/, "Invalid ObjectId"), // MongoDB ObjectId format
+  userId: z.string().regex(/^[a-fA-F0-9]{24}$/, "Invalid ObjectId"), // MongoDB ObjectId format
   type: z.enum(contentTypes),
   tags: z.array(z.string()).optional()
 });
 
-export type ContentInput = z.infer<typeof zodContentSchema>;
+interface AuthenticatedRequest extends Request {
+  userId: string;
+}
 
-export const addContent = async(req : Request, res : Response, next: NextFunction ) => {
+// export type ContentInput = z.infer<typeof zodContentSchema>;
+
+export const addContent = async(req : AuthenticatedRequest, res : Response, next: NextFunction ) => {
 
     try {
-        const contentData = new Content(req.body);
+
+        const validated = zodContentSchema.omit({ userId: true }).parse(req.body);
+        // const contentData = new Content(req.body);
         // if (!contentData) {
         //     console.log("invalid schema");
         //     return;
         // }
-        const saveContent = await contentData.save();
+        const content = new Content({
+            ...validated,
+            userId : req.userId
+        })
+        const saveContent = await content.save();
         res.status(201).send("Content Added Successfully").json(saveContent);
     }catch(error) {
         next(error);

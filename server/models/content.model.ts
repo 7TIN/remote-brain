@@ -13,7 +13,7 @@ const contentSchema = new mongoose.Schema( {
         require : true,
     },
 
-    useId : { 
+    userId : { 
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User',
         require : true,
@@ -26,7 +26,7 @@ const contentSchema = new mongoose.Schema( {
     },
 
     tags : [{
-       type : mongoose.Schema.Types.Array,
+       type : mongoose.Schema.Types.ObjectId,
        ref : 'Tags'
     }]
 

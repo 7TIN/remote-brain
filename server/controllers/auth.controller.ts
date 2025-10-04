@@ -46,30 +46,23 @@ export const signUp = async (
             return;
         }
 
-        const token = jwt.sign(
-            { userId: newUser[0]?._id },
-            JWT_SECRET as string,
-            {
-                expiresIn: "5hrs",
-            },
-        );
+        // const token = jwt.sign(
+        //     { userId: newUser[0]?._id },
+        //     JWT_SECRET as string,
+        //     {
+        //         expiresIn: "5hrs",
+        //     },
+        // );
         await session.commitTransaction();
         await session.endSession();
-
-        res.cookie("jwtToken", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            maxAge: 18000000,
-        });
 
         res.json({
             success: true,
             status: 201,
             message: "created successfully",
-            data: {
-                token: token
-            },
+            // data: {
+            //     token: token
+            // },
         });
     } catch (error) {
         console.log(error);
@@ -114,14 +107,6 @@ export const Signin = async (
         }
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET as string, {expiresIn: "5hrs"});
-
-        res.cookie("jwtToken", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            maxAge: 360000,
-        });
-
         res.status(200).json({
             success: true,
             message: "User signed in successfully",
