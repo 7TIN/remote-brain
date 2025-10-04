@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import Link from "../models/link.model";
-import { randomGenerate } from "../libs/utils";
 import Content from "../models/content.model";
 import User from "../models/user.model";
+import { generateShareHash } from "../libs/utils";
 
 interface ShareBody {
   share?: boolean;
@@ -17,10 +17,11 @@ export const createShareContent = async (
     const share = req.body.share;
 
     if (!share) {
-      res.status(411).send("share is false");
-      // await Link.deleteOne({
-      //     userId : req.userId,
-      // })
+      await Link.deleteOne({
+          userId : req.userId,
+      })
+      res.json({message : "Link Removed"});
+      
     }
     const shareLink = await Link.findOne({
       userId: req.userId,
@@ -33,7 +34,7 @@ export const createShareContent = async (
 
     const link = await Link.create({
       userId: req.userId,
-      hash: randomGenerate(10),
+      hash: generateShareHash(32),
     });
 
     res.json({ message: "Updated sharable Link", link: link });
@@ -58,10 +59,15 @@ export const getShareContent = async (
 
     const content = await Content.find({ userId: link.userId });
 
-    const user = await User.findOne({ userId: link.userId });
+    const user = await User.findOne({ _id: link.userId });
+
+    if(!user){
+      res.send("user not found");
+      return;
+    }
 
     res.json({
-      username: user?.username,
+      username: user.username,
       content: content,
     });
   } catch (error) {
