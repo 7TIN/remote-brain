@@ -23,12 +23,14 @@ const [password, setPassword] = useState('');
     try {
     //   const result = await api.post("/auth/signin", credentials);
     // console.log(credentials);
-    const result = await axios.post(import.meta.env.auth_url, {email, password}, {withCredentials: true});
+    const result = await axios.post(import.meta.env.VITE_AUTH_URL, {email, password});
     // console.log(result.data.data.token);
       const { token } = result.data.data;
       console.log(token);
+
       localStorage.setItem("token", token);
       console.log("success");
+
     } catch (err) {
       console.log(err);
     }

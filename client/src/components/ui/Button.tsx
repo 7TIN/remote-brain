@@ -9,7 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     text? : string;
     className? : string;
     icon? : ReactNode;
-    onClick? : () => void;
+    // onClick? : () => void;
 }
 
 const variantStyles = {
@@ -25,12 +25,16 @@ const sizeStyles = {
 }
 
 const Button = (
+    {
+        variant, size, className, icon, text, ...props
+
+    } : ButtonProps
     // {children} : {children : React.ReactNode}, 
-    props: ButtonProps
+    // props: ButtonProps,
 ) =>  {
     return (
-        <button className={cn(variantStyles[props.variant ?? "default"], sizeStyles[props.size ?? "sm"], props.className)}>
-            {props.icon}{props.text}
+        <button className={cn(variantStyles[variant ?? "default"], sizeStyles[size ?? "sm"], className)} {...props}>
+            {icon}{text}
         </button>
     )
 }
