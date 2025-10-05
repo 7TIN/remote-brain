@@ -4,17 +4,26 @@
 // import './App.css'
 
 // import Navbar from "./components/Navbar"
-import Navbar from "./components/Navbar"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+// import Navbar from "./components/Navbar"
+// import Home from "./pages/home"
+import Login from "./pages/Login"
 import Home from "./pages/home"
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] flex">
-    <Navbar/>
-    <Home/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
+    </BrowserRouter>
+    // <div className="min-h-screen bg-[#F5F5F5] flex">
+    // <Navbar/>
+    // <Home/>
+    // </div>
   )
 }
 

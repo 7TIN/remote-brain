@@ -4,9 +4,19 @@ import connectToDb from './database/mongodb';
 import contentRouter from './routes/content.route';
 import authorize from './middlewares/auth.middleware';
 import shareRoutes from './routes/share.routes';
+import cors from 'cors';
 // import cookieParser from 'cookie-parser';
 
 const app = express();
+
+const corsOptions = {
+    origin : "http://localhost:5173",
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    // allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 // app.use(cookieParser())
