@@ -13,12 +13,13 @@ const ShareBrainButton = () => {
         // const sharecode = await axios.post(`${import.meta.env.BASE_URL}/brain/share`,{share : true} ,{withCredentials: true});
         const sharecode = await api.post('/api/v1/brain/share', {share : true});
 
+
         if(!sharecode) {
             console.log("error");
             return;
         }
         // const shareLink = await axios.get(`${import.meta.env.BASE_URL}/share/:${sharecode}`);
-        setShareLink(`${import.meta.env.VITE_BASE_URL}/v1/brain/${sharecode.data.link.hash}`);
+        setShareLink(`${import.meta.env.VITE_BASE_URL}/api/v1/brain/${sharecode.data.link.hash}`);
     }
 
     return (

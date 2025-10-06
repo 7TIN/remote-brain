@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 // import Home from "./pages/home"
 import Login from "./pages/Login"
 import Home from "./pages/home"
+import SharedPage from "./pages/sharedContent"
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/:slug" element={<SharedPage/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
