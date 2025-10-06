@@ -3,7 +3,7 @@ import type { NextFunction, Request, Response } from "express";
 import Content from "../models/content.model";
 import { z } from "zod";
 
-const contentTypes = ['image', 'video', 'article', 'audio'] as const;
+const contentTypes = ["document", "tweet", "youtube", "link"] as const;
 
 export const zodContentSchema = z.object({
   link: z.string().min(1, "Link is required"),
