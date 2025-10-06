@@ -2,7 +2,7 @@ import { Icons } from "./ui/Icons";
 
 function Navbar() {
     return (
-    <div className="shadow-md p-3 relative max-w-xs h-screen w-full">
+    <div className="shadow-md p-3 relative h-full max-w-xs w-70">
         <div>
             Remote Brain
         </div>

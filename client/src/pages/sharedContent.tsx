@@ -60,7 +60,7 @@ const SharedPage = () => {
     // }
 
     return (
-        <div className="p-2 space-y-3 space-x-3 grid grid-cols-3">
+        <div className="grid grid-cols-3 gap-4 items-stretch p-4">
             {data.map((c) => (
              <ContentCard key={c.id} content={c}/>
             ))}
