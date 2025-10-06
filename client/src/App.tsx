@@ -10,11 +10,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/home"
 import SharedPage from "./pages/sharedContent"
+import Navbar from "./components/Navbar"
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
+    <div className="flex">
+    <Navbar/>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -22,6 +25,8 @@ function App() {
         <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
+    </div>
+
     // <div className="min-h-screen bg-[#F5F5F5] flex">
     // <Navbar/>
     // <Home/>

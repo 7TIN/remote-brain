@@ -13,7 +13,6 @@ const ShareBrainButton = () => {
         // const sharecode = await axios.post(`${import.meta.env.BASE_URL}/brain/share`,{share : true} ,{withCredentials: true});
         const sharecode = await api.post('/api/v1/brain/share', {share : true});
 
-
         if(!sharecode) {
             console.log("error");
             return;

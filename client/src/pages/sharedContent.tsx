@@ -1,8 +1,24 @@
 import axios from "axios";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
+import ContentCard from "../components/contentCard";
+// import { contentSchema } from "../lib/types";
 
 const SharedPage = () => {
+
+    
+    interface Content {
+    id: string;
+    link: string;
+    title: string;
+    type: "link" | "document" | "tweet" | "youtube";
+    tags: string[];
+    userId: string;
+
+  // ... add any other fields from your API
+}
+
+    const [data, setData] = useState<Content[]>([]);
 
     const fetch = useRef(false);
     const code = useParams().slug
@@ -12,11 +28,16 @@ const SharedPage = () => {
        const url = `${import.meta.env.VITE_BASE_URL}/${code}`
 
        const res = await axios.get(url);
+       setData(res.data.content);
+    //    const data = res.data;
+
+    //    const data = contentSchema.safeParse(res);
+
        if(!res){
         console.log("something went wrong")
         return;
        }
-       console.log(res.data);
+       console.log(res.data.content);
     }
 
     useEffect(() => {
@@ -39,9 +60,11 @@ const SharedPage = () => {
     // }
 
     return (
-        <>
-
-        </>
+        <div className="p-2 space-y-3 space-x-3 grid grid-cols-3">
+            {data.map((c) => (
+             <ContentCard key={c.id} content={c}/>
+            ))}
+        </div>
     )
 } 
 
