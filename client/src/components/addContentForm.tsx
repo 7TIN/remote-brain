@@ -1,6 +1,7 @@
+
 import { Card } from "./ui/Card";
 
-const addContentForm = async() => {
+const AddContentForm = () => {
     
     return (
         <Card>
@@ -21,4 +22,4 @@ const addContentForm = async() => {
     )
 }
 
-export default addContentForm;
+export default AddContentForm;

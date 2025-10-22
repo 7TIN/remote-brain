@@ -1,8 +1,10 @@
-import z from "zod";
+// import z from "zod";
 import { Card } from "./ui/Card";
-import type { contentSchema } from "../lib/types";
+import type { Content, 
+  // contentSchema 
+} from "../lib/types";
 import { Icons } from "./ui/Icons";
-import type { JSX } from "react";
+// import type { JSX } from "react";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
 
@@ -32,16 +34,22 @@ import type { JSX } from "react";
 //     userId : z.string(),
 // });
 
-type Content = z.infer<typeof contentSchema>;
+type Variant = "user" | "shared";
 
-const typeToIcon: Record<Content["type"], JSX.Element> = {
+interface ContentCardProps {
+  content: Content;
+  variant: Variant;
+}
+
+const typeToIcon = {
   document: <Icons.document className="w-4 h-4" />,
   link: <Icons.link2 className="w-5 h-5" />,
   youtube: <Icons.video className="w-4 h-4" />,
   tweet: <Icons.twitter className="w-4 h-4" />,
-};
+} as const;
 
-const ContentCard = ({ content }: { content: Content }) => {
+export const ContentCard = ({ content, variant }: ContentCardProps) => {
+  const isUser = variant === "user";
   return (
     <Card className="flex flex-col gap-y-3 justify-between max-w-xs h-full p-4 shadow-md">
       {/* <p>{content.id}</p> */}
@@ -52,20 +60,30 @@ const ContentCard = ({ content }: { content: Content }) => {
         {content.type === "twitter" ?? <Icons.twitter/> } */}
         <div className="flex items-center">{typeToIcon[content.type]}</div>
         <p className="">{content.title}</p>
-        <div className="flex space-x-3 items-center ">
-          <Icons.share2 className="w-5 h-5" />
-          <Icons.trash className="w-5 h-5" />
-        </div>
+
+        {isUser && (
+          <div className="flex space-x-3 items-center ">
+            <Icons.share2 className="w-5 h-5" />
+            <Icons.trash className="w-5 h-5" />
+          </div>
+        )}
       </div>
       <div className="break-words text-justify">
         <p>{content.link}</p>
       </div>
 
-      <p>{content.tags}</p>
+      {/* {content.tags.map((tag) => (
+          <span
+            key={tag}
+            className="text-xs px-2 py-1 bg-neutral-100 rounded-full text-neutral-600"
+          >
+            #{tag}
+          </span>
+        ))} */}
       {/* <p>{content.type}</p> */}
       {/* <p>{content.userId}</p> */}
     </Card>
   );
 };
 
-export default ContentCard;
+// export default ContentCard;

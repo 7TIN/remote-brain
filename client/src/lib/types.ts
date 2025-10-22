@@ -14,3 +14,5 @@ export const contentSchema = z.object({
   tags: z.array(z.string()),
   userId: z.string(),
 });
+
+export type Content = z.infer<typeof contentSchema>;

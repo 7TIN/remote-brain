@@ -8,26 +8,26 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Navbar from "./components/Navbar"
 // import Home from "./pages/home"
 import Login from "./pages/Login";
-import Home from "./pages/home";
-import SharedPage from "./pages/sharedContent";
+import Home from "./pages/Home";
+import SharedPage from "./pages/SharedContent";
 import Navbar from "./components/Navbar";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <div className="flex h-screen">
-      <Navbar />
-      <div className="flex-1 overflow-y-auto">
-        <BrowserRouter>
+    <BrowserRouter>
+      <div className="flex h-screen">
+        <Navbar />
+        <div className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:slug" element={<SharedPage />} />
             <Route path="/login" element={<Login />} />
           </Routes>
-        </BrowserRouter>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
 
     // <div className="min-h-screen bg-[#F5F5F5] flex">
     // <Navbar/>

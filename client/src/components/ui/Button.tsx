@@ -33,7 +33,9 @@ const Button = (
     // props: ButtonProps,
 ) =>  {
     return (
-        <button className={cn(variantStyles[variant ?? "default"], sizeStyles[size ?? "sm"], className)} {...props}>
+        <button 
+        // onClick={onClick}  
+        className={cn(variantStyles[variant ?? "default"], sizeStyles[size ?? "sm"], className)} {...props}>
             {icon}{text}
         </button>
     )

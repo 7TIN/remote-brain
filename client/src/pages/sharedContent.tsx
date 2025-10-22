@@ -1,17 +1,18 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
-import ContentCard from "../components/contentCard";
+import { ContentCard } from "../components/ContentCard";
+// import ContentCard from "../components/ContentCard";
 // import { contentSchema } from "../lib/types";
 
 const SharedPage = () => {
-
     
     interface Content {
     id: string;
     link: string;
     title: string;
     type: "link" | "document" | "tweet" | "youtube";
+    variant: "shared" | "user";
     tags: string[];
     userId: string;
 
@@ -62,7 +63,7 @@ const SharedPage = () => {
     return (
         <div className="grid grid-cols-3 gap-4 items-stretch p-4">
             {data.map((c) => (
-             <ContentCard key={c.id} content={c}/>
+             <ContentCard variant="shared" key={c.id} content={c} />
             ))}
         </div>
     )
