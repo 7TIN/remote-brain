@@ -5,9 +5,7 @@ import { ContentCard } from "../components/ContentCard";
 // import ContentCard from "../components/ContentCard";
 // import { contentSchema } from "../lib/types";
 
-const SharedPage = () => {
-    
-    interface Content {
+interface Content {
     id: string;
     link: string;
     title: string;
@@ -15,10 +13,10 @@ const SharedPage = () => {
     variant: "shared" | "user";
     tags: string[];
     userId: string;
-
-  // ... add any other fields from your API
 }
 
+const SharedPage = () => {
+    
     const [data, setData] = useState<Content[]>([]);
 
     const fetch = useRef(false);
@@ -30,9 +28,6 @@ const SharedPage = () => {
 
        const res = await axios.get(url);
        setData(res.data.content);
-    //    const data = res.data;
-
-    //    const data = contentSchema.safeParse(res);
 
        if(!res){
         console.log("something went wrong")
@@ -61,7 +56,7 @@ const SharedPage = () => {
     // }
 
     return (
-        <div className="grid grid-cols-3 gap-4 items-stretch p-4">
+        <div className="grid grid-cols-4 gap-4">
             {data.map((c) => (
              <ContentCard variant="shared" key={c.id} content={c} />
             ))}

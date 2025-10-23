@@ -4,6 +4,7 @@ import type { Content,
   // contentSchema 
 } from "../lib/types";
 import { Icons } from "./ui/Icons";
+import { NewContentCard } from "./NewCard";
 // import type { JSX } from "react";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
@@ -50,8 +51,9 @@ const typeToIcon = {
 
 export const ContentCard = ({ content, variant }: ContentCardProps) => {
   const isUser = variant === "user";
+  const Link = content.link;
   return (
-    <Card className="flex flex-col gap-y-3 justify-between max-w-xs h-full p-4 shadow-md">
+    <Card className="flex flex-col gap-y-3 max-w-sm h-full shadow-md">
       {/* <p>{content.id}</p> */}
       <div className="flex gap-x-4 justify-between">
         {/* {content.type === "document" ? <Icons.document/> | ""} 
@@ -68,8 +70,12 @@ export const ContentCard = ({ content, variant }: ContentCardProps) => {
           </div>
         )}
       </div>
-      <div className="break-words text-justify">
+      {/* <div className="break-words text-justify">
         <p>{content.link}</p>
+      </div> */}
+
+      <div className="" >
+        <NewContentCard link={Link}/>
       </div>
 
       {/* {content.tags.map((tag) => (
