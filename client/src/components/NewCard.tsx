@@ -13,7 +13,7 @@ export const NewContentCard = ({link, className} : NewContentCardProps) => {
     // const tweetId = link.split("/status/")[1]?.split("?")[0];
 
   return (
-        <div className={cn('rounded-md',className)}>
+        <div className={cn('bg-white p-px rounded-md overflow-visible antialiased will-change-transform',className)}>
           <XEmbed url={link} />
             {/* <Tweet id={tweetId} /> */}
         </div>
