@@ -36,11 +36,17 @@ export const EmbeddedCard = ({ link, className }: EmbeddedCardProps) => {
           >
             <XEmbed url={link} />
           </div>
-        )) || (Link === "twitter.com" && (
-          <div className={cn("bg-white p-px rounded-md overflow-visible antialiased will-change-transform",className)}>
-            <XEmbed url={link.replace("twitter.com","x.com")} />
+        )) ||
+        (Link === "twitter.com" && (
+          <div
+            className={cn(
+              "bg-white p-px rounded-md overflow-visible antialiased will-change-transform",
+              className
+            )}
+          >
+            <XEmbed url={link.replace("twitter.com", "x.com")} />
           </div>
-        )) }
+        ))}
     </>
   );
 };

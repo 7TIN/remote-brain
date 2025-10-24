@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import SharedPage from "./pages/SharedContent";
 // import Navbar from "./components/Navbar";
 import { Dashboard } from "./pages/Dashboard";
+import { Testing } from "./pages/Testing";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -39,6 +40,7 @@ function App() {
           <Route path="/:slug" element={<SharedPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dash" element={<Dashboard />} />
+          <Route path="/test" element={<Testing />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,10 +1,11 @@
 // import z from "zod";
-import { Card } from "./ui/Card";
+import { Card, CardHeader } from "./ui/Card";
 import type { Content, 
   // contentSchema 
 } from "../lib/types";
 import { Icons } from "./ui/Icons";
 import { NewContentCard } from "./NewCard";
+import { cn } from "../lib/utils";
 // import type { JSX } from "react";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
@@ -49,47 +50,97 @@ const typeToIcon = {
   tweet: <Icons.twitter className="w-4 h-4" />,
 } as const;
 
-export const ContentCard = ({ content, variant }: ContentCardProps) => {
+// export const ContentCard = ({ content, variant }: ContentCardProps) => {
+//   const isUser = variant === "user";
+//   const Link = content.link;
+//   return (
+//     <Card className="flex flex-col gap-y-3 max-w-sm h-full shadow-md">
+//       {/* <p>{content.id}</p> */}
+//       <div className="flex gap-x-4 justify-between">
+//         {/* {content.type === "document" ? <Icons.document/> | ""} 
+//         {content.type === "link" ?? <Icons.link/>} ||   
+//         {content.type === "youtube" ?? <Icons.video/>} || 
+//         {content.type === "twitter" ?? <Icons.twitter/> } */}
+//         <div className="flex items-center">{typeToIcon[content.type]}</div>
+//         <p className="">{content.title}</p>
+
+//         {isUser && (
+//           <div className="flex space-x-3 items-center ">
+//             <Icons.share2 className="w-5 h-5" />
+//             <Icons.trash className="w-5 h-5" />
+//           </div>
+//         )}
+//       </div>
+//       {/* <div className="break-words text-justify">
+//         <p>{content.link}</p>
+//       </div> */}
+
+//       <div className="" >
+//         <NewContentCard link={Link}/>
+//       </div>
+
+//       {/* {content.tags.map((tag) => (
+//           <span
+//             key={tag}
+//             className="text-xs px-2 py-1 bg-neutral-100 rounded-full text-neutral-600"
+//           >
+//             #{tag}
+//           </span>
+//         ))} */}
+//       {/* <p>{content.type}</p> */}
+//       {/* <p>{content.userId}</p> */}
+//     </Card>
+//   );
+// };
+
+// // export default ContentCard;
+
+export const ContentCardTitle = ({title, type, variant, className} : {title:string, type : string, variant? : string, className?: string} ) => {
   const isUser = variant === "user";
-  const Link = content.link;
+  return <div className={cn("flex justify-between items-center ",className)}>
+    <div className="flex items-center justify-center">
+      {typeToIcon[type]}
+    </div>
+    <div className="text-md font-medium">
+      {title}
+    </div>
+    <div>
+      {isUser && (
+        <div className="flex space-x-4 items-center">
+          <Icons.share2/>
+          <Icons.trash/>
+        </div>
+      )}
+    </div>
+    {/* {title}
+    {type}
+    {variant}
+    {className} */}
+  </div>
+}
+
+
+export const ContentCard = ({ content, variant }: ContentCardProps) => {
+  // const Link = content.link;
   return (
     <Card className="flex flex-col gap-y-3 max-w-sm h-full shadow-md">
-      {/* <p>{content.id}</p> */}
+      <CardHeader className="w-full items-center justify-center border-b border-b-neutral-300">
+        <ContentCardTitle title={content.title} type={content.type} variant={variant} className="w-full p-2"/>
+      </CardHeader>
       <div className="flex gap-x-4 justify-between">
-        {/* {content.type === "document" ? <Icons.document/> | ""} 
-        {content.type === "link" ?? <Icons.link/>} ||   
-        {content.type === "youtube" ?? <Icons.video/>} || 
-        {content.type === "twitter" ?? <Icons.twitter/> } */}
-        <div className="flex items-center">{typeToIcon[content.type]}</div>
+        {/* <div className="flex items-center">{typeToIcon[content.type]}</div>
         <p className="">{content.title}</p>
-
         {isUser && (
           <div className="flex space-x-3 items-center ">
             <Icons.share2 className="w-5 h-5" />
             <Icons.trash className="w-5 h-5" />
           </div>
-        )}
+        )} */}
       </div>
-      {/* <div className="break-words text-justify">
-        <p>{content.link}</p>
-      </div> */}
-
-      <div className="" >
+      {/* <div className="" >
         <NewContentCard link={Link}/>
-      </div>
-
-      {/* {content.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs px-2 py-1 bg-neutral-100 rounded-full text-neutral-600"
-          >
-            #{tag}
-          </span>
-        ))} */}
-      {/* <p>{content.type}</p> */}
-      {/* <p>{content.userId}</p> */}
+      </div> */}
     </Card>
   );
 };
 
-// export default ContentCard;

@@ -18,14 +18,3 @@ export const NewContentCard = ({link, className} : NewContentCardProps) => {
   )
 }
 
-    //     {link} 
-    // <div className={cn('bg-white rounded-md p-2 justify-center items-center',className)}>
-    //           <blockquote className="twitter-tweet"> <a title='x' href="https://twitter.com/21prnv/status/1980865390856331278?ref_src=twsrc%5Etfw"></a></blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
-    // </div>
-
-        // <div className={cn('bg-white flex rounded-md p-2 justify-center items-center',className)}>
-    //           <blockquote className="twitter-tweet"> <a title='x' href={link.replace("x.com","twitter.com")}></a></blockquote> 
-    // </div>
-
-// const tweetId = link.split("/status/")[1]?.split("?")[0];   
-{/* <Tweet id={tweetId} /> */}

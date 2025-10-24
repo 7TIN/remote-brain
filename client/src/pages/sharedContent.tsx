@@ -2,18 +2,19 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
 import { ContentCard } from "../components/ContentCard";
+import type { Content } from "../lib/types";
 // import ContentCard from "../components/ContentCard";
 // import { contentSchema } from "../lib/types";
 
-interface Content {
-    id: string;
-    link: string;
-    title: string;
-    type: "link" | "document" | "tweet" | "youtube";
-    variant: "shared" | "user";
-    tags: string[];
-    userId: string;
-}
+// interface Content {
+//     id: string;
+//     link: string;
+//     title: string;
+//     type: "link" | "document" | "tweet" | "youtube";
+//     variant: "shared" | "user";
+//     tags: string[];
+//     userId: string;
+// }
 
 const SharedPage = () => {
     
