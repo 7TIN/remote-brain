@@ -1,5 +1,8 @@
 // import React from 'react'
 import { cn } from '../lib/utils'
+// import { Tweet } from 'react-tweet'
+// import { Card, CardContent } from './ui/Card'
+import { XEmbed } from 'react-social-media-embed'
 
 type NewContentCardProps = {
   link: string
@@ -7,11 +10,18 @@ type NewContentCardProps = {
 }
 
 export const NewContentCard = ({link, className} : NewContentCardProps) => {
-  return (
+    // const tweetId = link.split("/status/")[1]?.split("?")[0];
 
-    <div className={cn('flex rounded-md p-2 justify-center items-center',className)}>
-              <blockquote className=""> <a title='x' href={link.replace("x.com","twitter.com")}></a></blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
-    </div>
+  return (
+        <div className={cn('rounded-md',className)}>
+          <XEmbed url={link} />
+            {/* <Tweet id={tweetId} /> */}
+        </div>
+
+
+    // <div className={cn('bg-white flex rounded-md p-2 justify-center items-center',className)}>
+    //           <blockquote className="twitter-tweet"> <a title='x' href={link.replace("x.com","twitter.com")}></a></blockquote> 
+    // </div>
   )
 }
 

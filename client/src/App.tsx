@@ -32,7 +32,7 @@ function App() {
       //   </div>
       // </div>
       
-    <div className="h-screen">
+    <div className="min-h-screen"> 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
