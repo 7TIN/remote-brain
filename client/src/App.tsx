@@ -1,12 +1,4 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-
-// import Navbar from "./components/Navbar"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import Navbar from "./components/Navbar"
-// import Home from "./pages/home"
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import SharedPage from "./pages/SharedContent";
@@ -15,8 +7,6 @@ import { Dashboard } from "./pages/Dashboard";
 import { Testing } from "./pages/Testing";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     
       // <div className="flex h-screen">
@@ -33,7 +23,7 @@ function App() {
       //   </div>
       // </div>
       
-    <div className="min-h-screen"> 
+    <div className="min-h-screen w-full"> 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -44,12 +34,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-
-
-    // <div className="min-h-screen bg-[#F5F5F5] flex">
-    // <Navbar/>
-    // <Home/>
-    // </div>
   );
 }
 

@@ -1,12 +1,10 @@
-// import z from "zod";
-import { Card, CardHeader } from "./ui/Card";
-import type { Content, 
-  // contentSchema 
+import { Card, CardContent, CardHeader } from "./ui/Card";
+import type { Content, ContentType, 
 } from "../lib/types";
 import { Icons } from "./ui/Icons";
-import { NewContentCard } from "./NewCard";
 import { cn } from "../lib/utils";
-// import type { JSX } from "react";
+import type { JSX } from "react";
+import { EmbeddedCard } from "./EmbeddedCard";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
 
@@ -37,18 +35,17 @@ import { cn } from "../lib/utils";
 // });
 
 type Variant = "user" | "shared";
-
 interface ContentCardProps {
   content: Content;
   variant: Variant;
 }
 
-const typeToIcon = {
-  document: <Icons.document className="w-4 h-4" />,
+const typeToIcon:Record<ContentType, JSX.Element> = {
+  document: <Icons.document className="w-5 h-5" />,
   link: <Icons.link2 className="w-5 h-5" />,
-  youtube: <Icons.video className="w-4 h-4" />,
-  tweet: <Icons.twitter className="w-4 h-4" />,
-} as const;
+  youtube: <Icons.video className="w-5 h-5" />,
+  tweet: <Icons.twitter className="w-5 h-5" />,
+};
 
 // export const ContentCard = ({ content, variant }: ContentCardProps) => {
 //   const isUser = variant === "user";
@@ -95,52 +92,35 @@ const typeToIcon = {
 
 // // export default ContentCard;
 
-export const ContentCardTitle = ({title, type, variant, className} : {title:string, type : string, variant? : string, className?: string} ) => {
+export const ContentCardTitle = ({title, type, variant, className} : {title:string, type : ContentType, variant? : string, className?: string} ) => {
   const isUser = variant === "user";
   return <div className={cn("flex justify-between items-center ",className)}>
     <div className="flex items-center justify-center">
       {typeToIcon[type]}
     </div>
-    <div className="text-md font-medium">
+    <div className="text-md">
       {title}
     </div>
     <div>
       {isUser && (
         <div className="flex space-x-4 items-center">
-          <Icons.share2/>
-          <Icons.trash/>
+          <Icons.share2 className="w-5 h-5"/>
+          <Icons.trash className="w-5 h-5"/>
         </div>
       )}
     </div>
-    {/* {title}
-    {type}
-    {variant}
-    {className} */}
   </div>
 }
 
-
 export const ContentCard = ({ content, variant }: ContentCardProps) => {
-  // const Link = content.link;
   return (
-    <Card className="flex flex-col gap-y-3 max-w-sm h-full shadow-md">
+    <Card className="flex flex-col gap-y-3 max-w-sm h-full border border-neutral-300 m-4">
       <CardHeader className="w-full items-center justify-center border-b border-b-neutral-300">
-        <ContentCardTitle title={content.title} type={content.type} variant={variant} className="w-full p-2"/>
+        <ContentCardTitle title={content.title} type={content.type} variant={variant} className="w-full p-4"/>
       </CardHeader>
-      <div className="flex gap-x-4 justify-between">
-        {/* <div className="flex items-center">{typeToIcon[content.type]}</div>
-        <p className="">{content.title}</p>
-        {isUser && (
-          <div className="flex space-x-3 items-center ">
-            <Icons.share2 className="w-5 h-5" />
-            <Icons.trash className="w-5 h-5" />
-          </div>
-        )} */}
-      </div>
-      {/* <div className="" >
-        <NewContentCard link={Link}/>
-      </div> */}
+      <CardContent>
+        <EmbeddedCard link={content.link} className="p-4"/>
+      </CardContent>
     </Card>
   );
 };
-

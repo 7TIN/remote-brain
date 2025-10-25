@@ -17,3 +17,4 @@ export const contentSchema = z.object({
 //   ),
 
 export type Content = z.infer<typeof contentSchema>;
+export type ContentType = Content["type"];
