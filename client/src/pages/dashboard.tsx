@@ -4,8 +4,7 @@ import { EmbeddedCard } from "../components/EmbeddedCard";
 
 export const Dashboard = () => {
   return (
-
-        <div className="w-7xl mx-auto px-1 py-2 flex justify-center min-h-0">
+    <div className="w-7xl mx-auto px-1 py-2 flex justify-center min-h-0">
       <div className="grid grid-cols-4 gap-2 w-full items-start content-start auto-rows-min min-h-0">
         <div className="flex flex-col gap-2 min-h-0 box-border antialiased">
           <EmbeddedCard link="https://x.com/dishantwt_/status/1980850040555102318" />

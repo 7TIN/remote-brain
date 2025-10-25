@@ -6,6 +6,7 @@ import { cn } from "../lib/utils";
 import type { JSX } from "react";
 import { EmbeddedCard } from "./EmbeddedCard";
 
+
 // enum contentType {"document", "tweet", "youtube" , "link"}
 
 // export type content = {
@@ -38,6 +39,7 @@ type Variant = "user" | "shared";
 interface ContentCardProps {
   content: Content;
   variant: Variant;
+  className?: string;
 }
 
 const typeToIcon:Record<ContentType, JSX.Element> = {
@@ -110,11 +112,13 @@ export const ContentCardTitle = ({title, type, variant, className} : {title:stri
       )}
     </div>
   </div>
+
+  
 }
 
-export const ContentCard = ({ content, variant }: ContentCardProps) => {
+export const ContentCard = ({ content, variant, className }: ContentCardProps) => {
   return (
-    <Card className="flex flex-col gap-y-3 max-w-sm h-full border border-neutral-300 m-4">
+    <Card className={cn("flex flex-col gap-y-3 max-w-sm h-full p-2",className)}>
       <CardHeader className="w-full items-center justify-center border-b border-b-neutral-300">
         <ContentCardTitle title={content.title} type={content.type} variant={variant} className="w-full p-4"/>
       </CardHeader>

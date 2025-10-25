@@ -22,9 +22,9 @@ const content:Content = {
 
 export const Testing = () => {
   return (
-    <div className='flex w-full'>
-        <ContentCard content={content} variant='user'/>
-        <ContentCard content={content} variant='shared'/>
+    <div className='flex m-2 gap-4'>
+        <ContentCard content={content} variant='shared' className='border border-neutral-300'/>
+        <ContentCard content={content} variant='user' className='border border-neutral-300'/>
     </div>
   )
 }
