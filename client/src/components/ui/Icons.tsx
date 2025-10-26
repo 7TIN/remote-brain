@@ -157,9 +157,8 @@ export const Icons = {
     // </svg>
   ),
 
-  linkSquare: (props: IconProps) => {
-    return (
-          <svg
+  linkSquare: (props: IconProps) => (
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       width="24"
@@ -183,9 +182,33 @@ export const Icons = {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  ),
 
-  },
+  mediumLogo: (props: IconProps) => (
+    <svg
+    height={20}
+    width={20}
+      className="border flex items-center justify-center"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <text
+        x="2"
+        y="15"
+        fontSize="16"
+        fontWeight="bold"
+        // textAnchor="middle"
+        fill="currentColor"
+        // fontFamily="Kaisei Opti, serif"
+        className="tracking-tight font-black"
+        fontFamily="Trirong, serif"
+      >
+        Me
+      </text>
+    </svg>
+  ),
 
   hash: (props: IconProps) => (
     // <svg

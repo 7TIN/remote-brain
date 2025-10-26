@@ -25,7 +25,7 @@ export function MediumCard({ link }: MediumCardProps) {
           <img alt="logo" src={"https://miro.medium.com/v2/resize:fit:1100/format:webp/1*5NKHQDjC1cUC441HTejxuQ.png"} />
         </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-100 from-neutral-50 to-neutral-100">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all duration-200 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-100 from-neutral-50 to-neutral-100">
           <div className="flex items-center gap-2 text-lg font-semibold text-neutral-900">
             <span>Visit here</span>
             <Icons.linkSquare className="w-5 h-5" />
