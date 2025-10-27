@@ -9,16 +9,19 @@ const ShareBrainButton = () => {
     const [shareLink, setShareLink] = useState('');
 
     const handleOnClick = async() => {
-
-        // const sharecode = await axios.post(`${import.meta.env.BASE_URL}/brain/share`,{share : true} ,{withCredentials: true});
+        try {
+                    // const sharecode = await axios.post(`${import.meta.env.BASE_URL}/brain/share`,{share : true} ,{withCredentials: true});
         const sharecode = await api.post('/api/v1/brain/share', {share : true});
 
-        if(!sharecode) {
-            console.log("error");
-            return;
-        }
+        // if(!sharecode) {
+        //     console.log("error");
+        //     return;
+        // }
         // const shareLink = await axios.get(`${import.meta.env.BASE_URL}/share/:${sharecode}`);
-        setShareLink(`${import.meta.env.VITE_BASE_URL}/api/v1/brain/${sharecode.data.link.hash}`);
+        setShareLink(`${import.meta.env.VITE_MAIN_URL}/${sharecode.data.link.hash}`);
+        }catch (error){
+            console.log(error);
+    }
     }
 
     return (

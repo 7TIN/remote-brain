@@ -8,13 +8,14 @@ import { MediumCard } from "./Medium";
 type EmbeddedCardProps = {
   link: string;
   className?: string;
+  domain: string;
 };
 
-export const EmbeddedCard = ({ link, className }: EmbeddedCardProps) => {
-  const Link = link.split("://")[1].split("/")[0];
+export const EmbeddedCard = ({ link, domain, className }: EmbeddedCardProps) => {
+  // const Link = link.split("://")[1].split("/")[0];
   return (
     <>
-      {(Link === "youtu.be" && (
+      {(domain === "youtu.be" && (
         <div
           className={cn(
             "bg-white border border-slate-300 py-1 overflow-visible antialiased will-change-transform flex justify-center items-center",
@@ -29,7 +30,7 @@ export const EmbeddedCard = ({ link, className }: EmbeddedCardProps) => {
           />
         </div>
       )) ||
-        (Link === "x.com" && (
+        (domain === "x.com" && (
           <div
             className={cn(
               "bg-white p-px rounded-md overflow-visible antialiased will-change-transform",
@@ -39,7 +40,7 @@ export const EmbeddedCard = ({ link, className }: EmbeddedCardProps) => {
             <XEmbed url={link} />
           </div>
         )) ||
-        (Link === "twitter.com" && (
+        (domain === "twitter.com" && (
           <div
             className={cn(
               "bg-white p-px rounded-md overflow-visible antialiased will-change-transform",
@@ -48,7 +49,7 @@ export const EmbeddedCard = ({ link, className }: EmbeddedCardProps) => {
           >
             <XEmbed url={link.replace("twitter.com", "x.com")} />
           </div>
-        )) || (Link === "medium.com" && (
+        )) || (domain === "medium.com" && (
           <MediumCard link={link}/>
         )) 
         }

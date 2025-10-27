@@ -94,11 +94,12 @@ const typeToIcon:Record<ContentType, JSX.Element> = {
 
 // // export default ContentCard;
 
-export const ContentCardTitle = ({title, type, variant, className} : {title:string, type : ContentType, variant? : string, className?: string} ) => {
+export const ContentCardTitle = ({title, type, variant, domain, className} : {title:string, type : ContentType, variant? : string, domain:string, className?: string} ) => {
   const isUser = variant === "user";
   return <div className={cn("flex justify-between items-center ",className)}>
     <div className="flex items-center justify-center">
-      {typeToIcon[type]}
+      { type!== 'link' && 
+      typeToIcon[type] || domain !== 'medium.com' && typeToIcon[type] || (<Icons.mediumLogo className="rounded-xs text-white bg-neutral-950 font-[Kaisei Opti]" />)}
     </div>
     <div className="text-md">
       {title}
@@ -117,13 +118,14 @@ export const ContentCardTitle = ({title, type, variant, className} : {title:stri
 }
 
 export const ContentCard = ({ content, variant, className }: ContentCardProps) => {
+  const domain = content.link.split("://")[1].split("/")[0];
   return (
     <Card className={cn("flex flex-col gap-y-3 max-w-sm h-full p-2",className)}>
       <CardHeader className="w-full items-center justify-center border-b border-b-neutral-300">
-        <ContentCardTitle title={content.title} type={content.type} variant={variant} className="w-full p-4"/>
+        <ContentCardTitle title={content.title} type={content.type} domain={domain} variant={variant} className="w-full p-4"/>
       </CardHeader>
       <CardContent>
-        <EmbeddedCard link={content.link} className="p-4"/>
+        <EmbeddedCard link={content.link} domain={domain} className="p-4"/>
       </CardContent>
     </Card>
   );

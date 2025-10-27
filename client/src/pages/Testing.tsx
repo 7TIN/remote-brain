@@ -1,6 +1,6 @@
 // import React from 'react'
 import { ContentCard } from '../components/ContentCard'
-import { Icons } from '../components/ui/Icons'
+// import { Icons } from '../components/ui/Icons'
 import type { Content } from '../lib/types'
 
 const content:Content = {
@@ -26,7 +26,7 @@ export const Testing = () => {
     <div className='flex m-2 gap-4'>
         <ContentCard content={content} variant='shared' className='border border-neutral-300'/>
         <ContentCard content={content} variant='user' className='border border-neutral-300'/>
-        <Icons.mediumLogo className='rounded-xs text-white bg-neutral-950 font-[Kaisei Opti]'/>
+        {/* <Icons.mediumLogo className='rounded-xs text-white bg-neutral-950 font-[Kaisei Opti]'/> */}
     </div>
   )
 }
