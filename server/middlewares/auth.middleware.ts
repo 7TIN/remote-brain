@@ -14,16 +14,17 @@ interface AuthPayload extends JwtPayload {
 }
 
 const authorize = async(req: Request, res: Response, next: NextFunction ) => {
+  // console.log("here");
      try {
-
         const token = req.headers['authorization']?.split(" ")[1];
-
 
         if (!token) {
             return res.status(401).json({message : "Unauthorize : no token", success : false})
         }
-
+        // console.log("before error");
         const decoded = jwt.verify(token ,JWT_SECRET as string);
+        // console.log("after error");
+
         if (typeof decoded !== "object" || !("userId" in decoded)) {
       return res.status(401).json({ message: "Invalid token payload", success: false });
     }
@@ -41,7 +42,10 @@ const authorize = async(req: Request, res: Response, next: NextFunction ) => {
         res.locals.user = user;
         next();
      }catch(error){
-        console.log(error);
+      next(error);
+      // // res.send(error);
+      // console.log(error);
+      //   return res.status(401).json({ message: "Jwt token expired", success: false });  
      }
 }
 

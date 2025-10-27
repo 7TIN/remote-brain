@@ -6,6 +6,7 @@ import authorize from './middlewares/auth.middleware';
 import shareRoutes from './routes/share.routes';
 import cors from 'cors';
 import shareLinkRouter from './routes/sharelink.routes';
+import errorMiddleware from './middlewares/error.middleware';
 // import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -32,6 +33,9 @@ app.use('/api/v1/auth',authRouter);
 app.use('/api/v1/content',authorize,contentRouter);
 app.use('/api/v1/brain',authorize, shareRoutes);
 app.use('/',shareLinkRouter);
+
+
+app.use(errorMiddleware);
 
 // app.get("/api/v1/brain/share",authorize )
 // app.get("/api/v1/brain/:shareLink", (req, res) => {})
