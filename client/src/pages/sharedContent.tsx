@@ -47,15 +47,6 @@ const SharedPage = () => {
         )
     }, [code])
 
-    // console.log("this is from the outside" +code);
-    // const sharedCode = searchParams.get("share");
-
-    // try {
-
-    // }catch(error){
-    //     console.log(error);
-    // }
-
     return (
         <div className="grid grid-cols-4 gap-4 m-4">
             {data.map((c ,index) => (
