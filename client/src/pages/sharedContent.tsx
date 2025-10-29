@@ -48,9 +48,9 @@ const SharedPage = () => {
     }, [code])
 
     return (
-        <div className="grid grid-cols-4 gap-4 m-4">
+        <div className="space-y-4 columns-4 gap-4 m-4">
             {data.map((c ,index) => (
-             <ContentCard variant="shared" key={index} content={c} className="border border-neutral-300" />
+             <ContentCard variant="shared" key={index} content={c} className="border border-neutral-300 break-inside-avoid" />
             ))}
         </div>
     )

@@ -7,7 +7,7 @@ interface MediumCardProps {
 export function MediumCard({ link }: MediumCardProps) {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer" className="inline-block w-full">
-      <div className="relative h-40 w-full mx-auto rounded-lg border border-neutral-200 hover:shadow-sm transition-all duration-300 ease-in-out flex items-center justify-center cursor-pointer overflow-hidden group">
+      <div className="relative h-40 w-full mx-auto rounded-lg border border-neutral-200 hover:shadow-ace hover:border-none transition-all duration-300 ease-in-out flex items-center justify-center cursor-pointer overflow-hidden group">
         <div className="bg-neutral-100 absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out group-hover:scale-95 opacity-100 group-hover:opacity-0">
           {/* <svg className="w-32 h-32" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <text
