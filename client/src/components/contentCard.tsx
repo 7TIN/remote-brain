@@ -80,7 +80,7 @@ export const ContentCard = ({ content, variant, className }: ContentCardProps) =
         <ContentCardTitle title={content.title} type={content.type} domain={domain} variant={variant} className="w-full p-4"/>
       </CardHeader>
       <CardContent>
-        <EmbeddedCard link={content.link} domain={domain} className="p-4"/>
+        <EmbeddedCard link={content.link} domain={domain} className=""/>
       </CardContent>
     </Card>
   );

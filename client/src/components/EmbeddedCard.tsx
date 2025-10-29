@@ -15,17 +15,15 @@ export const EmbeddedCard = ({ link, domain, className }: EmbeddedCardProps) => 
   // const Link = link.split("://")[1].split("/")[0];
   return (
     <>
-      {(domain === "youtu.be" && (
+      {((domain === "youtu.be" || domain === "www.youtube.com") && (
         <div
           className={cn(
-            "bg-white border border-slate-300 py-1 overflow-visible antialiased will-change-transform flex justify-center items-center",
+            "bg-white border max-h-50 border-slate-300 overflow-visible antialiased will-change-transform flex justify-center items-center",
             className
           )}
         >
           <YouTubeEmbed
-            className="bg-white"
-            height={200}
-            width={312}
+            className="bg-white h-full w-full"
             url={link}
           />
         </div>
