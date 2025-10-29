@@ -34,7 +34,7 @@ export const addContent = async(req : AuthenticatedRequest, res : Response, next
             userId : req.userId
         })
         const saveContent = await content.save();
-        res.status(201).send("Content Added Successfully").json(saveContent);
+        res.status(201).json({message : "Content Added Successfully", content : saveContent});
     }catch(error) {
         next(error);
     }
