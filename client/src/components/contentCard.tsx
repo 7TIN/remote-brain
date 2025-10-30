@@ -44,8 +44,8 @@ interface ContentCardProps {
 const typeToIcon: Record<ContentType, JSX.Element> = {
   document: <Icons.document className="w-5 h-5" />,
   link: <Icons.link2 className="w-5 h-5" />,
-  youtube: <Icons.video className="w-5 h-5" />,
-  tweet: <Icons.twitter className="w-5 h-5" />,
+  youtube: <Icons.youtubeLogo className="w-6 h-6" />,
+  tweet: <Icons.twitter className="w-6 h-6" />,
 };
 
 export const ContentCardTitle = ({
@@ -78,7 +78,7 @@ export const ContentCardTitle = ({
         {isUser && (
           <div className="flex space-x-4 items-center relative">
             <Icons.share2
-              className="w-5 h-5 "
+              className="w-5 h-5 cursor-pointer"
               onClick={() => {
                 setOpen((o) => !o);
               }}
@@ -86,15 +86,16 @@ export const ContentCardTitle = ({
             {open && (
               <div className="absolute z-10 mx-auto top-2.5 max-w-80 rounded-md shadow-ace">
                 <Card className="p-1 flex gap-y-2">
-                  <CardHeader className="flex flex-row justify-between border-b border-neutral-300">
+                  <CardHeader className="flex flex-row justify-between border-b border-neutral-300 pb-2">
                     Share Link
                     <Icons.crossLogo
                       onClick={() => {
                         setOpen((c) => !c);
                       }}
+                      className="cursor-pointer"
                     />
                   </CardHeader>
-                  <CardContent className="border border-neutral-300 p-1 rounded-md">
+                  <CardContent className="border border-neutral-300 p-1 rounded-md bg-neutral-100">
                     <div className="flex justify-between items-center">
                       <span className="m-1 text-xs overflow-hidden truncate whitespace-nowrap">{link}</span>
                       <Button onClick={() => navigator.clipboard.writeText(link)} text="Copy" className="bg-neutral-700 rounded-lg cursor-pointer active:bg-neutral-950 text-xs py-1 px-2" />
