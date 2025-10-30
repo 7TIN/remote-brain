@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getShareContent } from "../controllers/share.controller";
+import { getSharedContent } from "../controllers/share.controller";
 
 const shareLinkRouter = Router();
 
-shareLinkRouter.get('/:shareLink', getShareContent);
+shareLinkRouter.get('/:shareLink', getSharedContent);
 
 export default shareLinkRouter;

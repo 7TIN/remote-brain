@@ -42,9 +42,10 @@ export const addContent = async(req : AuthenticatedRequest, res : Response, next
 
 export const getContents = async(req : Request, res : Response, next: NextFunction ) => {
     try {
-        const contentData = await Content.find();
+        const contentData = await Content.find({userId : req.userId});
         res.status(200).json({
-            Contents : contentData
+            message : "Contents fetched successfully",
+            contents : contentData
         })
     }catch(error){
         next(error);

@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 app.use('/api/v1/auth',authRouter);
 app.use('/api/v1/content',authorize,contentRouter);
 app.use('/api/v1/brain',authorize, shareRoutes);
-app.use('/',shareLinkRouter);
+app.use('/api/v1/share',shareLinkRouter);
 
 
 app.use(errorMiddleware);

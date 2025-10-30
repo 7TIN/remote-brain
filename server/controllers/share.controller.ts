@@ -8,7 +8,7 @@ interface ShareBody {
   share?: boolean;
 }
 
-export const createShareContent = async (
+export const createShareLink = async (
   req: Request<object, object, ShareBody> & { userId: string },
   res: Response,
   next: NextFunction
@@ -43,7 +43,7 @@ export const createShareContent = async (
   }
 };
 
-export const getShareContent = async (
+export const getSharedContent = async (
   req: Request,
   res: Response,
   next: NextFunction
