@@ -35,7 +35,7 @@ const Button = (
     return (
         <button 
         // onClick={onClick}  
-        className={cn(variantStyles[variant ?? "default"], sizeStyles[size ?? "sm"], className)} {...props}>
+        className={cn(variantStyles[variant ?? "default"], sizeStyles[size ?? "sm"], className, "text-center")} {...props}>
             {icon}{text}
         </button>
     )

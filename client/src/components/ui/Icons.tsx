@@ -184,10 +184,30 @@ export const Icons = {
     </svg>
   ),
 
+  crossLogo: (props: IconProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      color="#000000"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  ),
+
   mediumLogo: (props: IconProps) => (
     <svg
-    height={20}
-    width={20}
+      height={20}
+      width={20}
       className="border flex items-center justify-center"
       viewBox="0 0 20 20"
       fill="currentColor"
