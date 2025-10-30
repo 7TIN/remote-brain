@@ -25,7 +25,7 @@ const SharedPage = () => {
 
     const getContents = async(code : string) => {
 
-       const url = `${import.meta.env.VITE_BASE_URL}/${code}`
+       const url = `${import.meta.env.VITE_BASE_URL}/api/v1/share/${code}`
 
        const res = await axios.get(url);
        setData(res.data.content);
