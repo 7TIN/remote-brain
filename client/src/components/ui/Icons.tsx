@@ -1,4 +1,8 @@
-type IconProps = React.HTMLAttributes<SVGElement>;
+import { motion } from "framer-motion";
+
+// type IconProps = React.HTMLAttributes<SVGElement>;
+type IconProps = React.SVGProps<SVGSVGElement>;
+type MotionIconProps = React.ComponentProps<typeof motion.svg>;
 
 export const Icons = {
   twitter: (props: IconProps) => (
@@ -184,7 +188,7 @@ export const Icons = {
     </svg>
   ),
 
-  crossLogo: (props: IconProps) => (
+  cross: (props: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -316,26 +320,61 @@ export const Icons = {
     // </svg>
   ),
 
-  trash: (props: IconProps) => (
-    <svg
+  trash: (props: MotionIconProps) => (
+    <motion.svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      viewBox="-1 0 28 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
+      initial = "initial"
+      whileHover="hover"
       strokeLinejoin="round"
-      className="lucide lucide-trash2-icon lucide-trash-2"
       {...props}
     >
       <path d="M10 11v6" />
       <path d="M14 11v6" />
       <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-      <path d="M3 6h18" />
-      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    </svg>
+      <motion.path
+
+      variants={{
+          initial : {
+          x: 0,
+          rotate: 0,
+        },
+        hover : {
+          x: 7,
+          rotate: 40,
+          transition: {
+            duration: 0.5,
+            ease: "easeInOut",
+          },
+        }
+      }}
+        d="M3 6h18"
+      />
+      <motion.path
+        d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+        variants={{
+          initial : {
+          x: 0,
+          rotate: 0,
+        },
+        hover : {
+          x: 8,
+          rotate: 40,
+          transition: {
+            duration: 0.5,
+            ease: "easeInOut",
+          },
+        }
+      }}
+
+      />
+    </motion.svg>
   ),
 
   link2: (props: IconProps) => (

@@ -5,6 +5,7 @@ import { cn } from "../lib/utils";
 import { useState, type JSX } from "react";
 import { EmbeddedCard } from "./EmbeddedCard";
 import { Button } from "./ui/Button";
+import { motion } from "framer-motion";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
 
@@ -65,18 +66,24 @@ export const ContentCardTitle = ({
 }) => {
   const isUser = variant === "user";
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={cn("flex justify-between gap-x-4 items-center ", className)}>
+    <div
+      className={cn("flex justify-between gap-x-4 items-center ", className)}
+    >
       <div className="flex items-center justify-center">
         {(type !== "link" && typeToIcon[type]) ||
           (domain !== "medium.com" && typeToIcon[type]) || (
             <Icons.mediumLogo className="rounded-xs text-white bg-neutral-950 font-[Kaisei Opti]" />
           )}
       </div>
-      <h3 className="text-center truncate overflow-hidden " title={title}>{title}</h3>
+      <h3 className="text-center truncate overflow-hidden " title={title}>
+        {title}
+      </h3>
       <div>
         {isUser && (
           <div className="flex space-x-4 items-center relative">
+            <div className="flex items-center relative">
             <Icons.share2
               className="w-5 h-5 cursor-pointer"
               onClick={() => {
@@ -88,7 +95,7 @@ export const ContentCardTitle = ({
                 <Card className="p-1 flex gap-y-2">
                   <CardHeader className="flex flex-row justify-between border-b border-neutral-300 pb-2">
                     Share Link
-                    <Icons.crossLogo
+                    <Icons.cross
                       onClick={() => {
                         setOpen((c) => !c);
                       }}
@@ -97,14 +104,44 @@ export const ContentCardTitle = ({
                   </CardHeader>
                   <CardContent className="border border-neutral-300 p-1 rounded-md bg-neutral-100">
                     <div className="flex justify-between items-center">
-                      <span className="m-1 text-xs overflow-hidden truncate whitespace-nowrap">{link}</span>
-                      <Button onClick={() => navigator.clipboard.writeText(link)} text="Copy" className="bg-neutral-700 rounded-lg cursor-pointer active:bg-neutral-950 text-xs py-1 px-2" />
+                      <span className="m-1 text-xs overflow-hidden truncate whitespace-nowrap">
+                        {link}
+                      </span>
+                      <Button
+                        onClick={() => navigator.clipboard.writeText(link)}
+                        text="Copy"
+                        className="bg-neutral-700 rounded-lg cursor-pointer active:bg-neutral-950 text-xs py-1 px-2"
+                      />
                     </div>
                   </CardContent>
                 </Card>
               </div>
             )}
-            <Icons.trash className="w-5 h-5" />
+            </div>
+            <div className="flex items-center relative">
+              <motion.div
+                whileHover="animate"
+                className=" flex items-center justify-center cursor-pointer relative"
+                onClick={() => setIsOpen((o) => !o)}
+              >
+                <Icons.trash className="w-5 h-5" />
+              </motion.div>
+              {isOpen && (
+                <div className="absolute z-10 mx-auto top-2 max-w-40 rounded-md shadow-ace">
+                  <Card className="p-1 flex gap-y-2">
+                    <CardHeader className="flex flex-row justify-between border-b border-neutral-300 pb-2">
+                      <Icons.cross
+                        onClick={() => {
+                          setIsOpen((o) => !o);
+                        }}
+                        className="cursor-pointer"
+                      />
+                    </CardHeader>
+                    <CardContent>Hello</CardContent>
+                  </Card>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -120,7 +157,10 @@ export const ContentCard = ({
   const domain = content.link.split("://")[1].split("/")[0];
   return (
     <Card
-      className={cn("flex flex-col gap-y-3 max-w-sm h-full p-2 border border-neutral-300 shadow-ace", className)}
+      className={cn(
+        "flex flex-col gap-y-3 max-w-sm h-full p-2 border border-neutral-300 shadow-ace",
+        className
+      )}
     >
       <CardHeader className="w-full items-center justify-center border-b border-b-neutral-300">
         <ContentCardTitle
