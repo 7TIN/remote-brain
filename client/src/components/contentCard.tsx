@@ -6,6 +6,7 @@ import { useState, type JSX } from "react";
 import { EmbeddedCard } from "./EmbeddedCard";
 import { Button } from "./ui/Button";
 import { motion } from "framer-motion";
+import api from "../lib/api";
 
 // enum contentType {"document", "tweet", "youtube" , "link"}
 
@@ -49,6 +50,19 @@ const typeToIcon: Record<ContentType, JSX.Element> = {
   tweet: <Icons.twitter className="w-6 h-6" />,
 };
 
+const handleDelete = async(cardId : string) => {
+  try {
+    const url = import.meta.env.VITE_BASE_URL;
+    const response = await api.delete(`${url}/api/v1/content/${cardId}`);
+
+    if(response.status === 200){
+      console.log("success")
+    }
+  }catch (error) {
+    console.log(error);
+  }
+}
+
 export const ContentCardTitle = ({
   title,
   type,
@@ -56,6 +70,7 @@ export const ContentCardTitle = ({
   domain,
   className,
   link,
+  cardId,
 }: {
   title: string;
   type: ContentType;
@@ -63,6 +78,7 @@ export const ContentCardTitle = ({
   domain: string;
   className?: string;
   link: string;
+  cardId : string;
 }) => {
   const isUser = variant === "user";
   const [open, setOpen] = useState(false);
@@ -99,7 +115,7 @@ export const ContentCardTitle = ({
                       onClick={() => {
                         setOpen((c) => !c);
                       }}
-                      className="cursor-pointer"
+                      className="cursor-pointer rounded-lg transition-all duration-200 hover:bg-gray-200/40 hover:shadow-xs hover:scale-105"
                     />
                   </CardHeader>
                   <CardContent className="border border-neutral-300 p-1 rounded-md bg-neutral-100">
@@ -124,20 +140,26 @@ export const ContentCardTitle = ({
                 className=" flex items-center justify-center cursor-pointer relative"
                 onClick={() => setIsOpen((o) => !o)}
               >
-                <Icons.trash className="w-5 h-5" />
+                <Icons.trash className="w-6 h-6" />
               </motion.div>
               {isOpen && (
-                <div className="absolute z-10 mx-auto top-2 max-w-40 rounded-md shadow-ace">
+                <div className="absolute z-10 mx-auto top-2.5 right-4 w-40 rounded-md shadow-ace">
                   <Card className="p-1 flex gap-y-2">
                     <CardHeader className="flex flex-row justify-between border-b border-neutral-300 pb-2">
+                      Confirm Delete
                       <Icons.cross
                         onClick={() => {
                           setIsOpen((o) => !o);
                         }}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-lg transition-all duration-200 hover:bg-gray-200/40 hover:shadow-xs hover:scale-105"
                       />
                     </CardHeader>
-                    <CardContent>Hello</CardContent>
+                    <CardContent className="px-2 py-1">
+                      <div className="flex items-center justify-between">
+                        <Button text="Yes" className="px-4 py-1 text-sm rounded-md cursor-pointer hover:bg-red-700 bg-red-500" onClick={() => handleDelete(cardId)}/>
+                        <Button text="No" className="px-4 py-1 text-sm rounded-md cursor-pointer hover:bg-neutral-950 bg-neutral-800" onClick={() => setIsOpen((c) => !c)}/>
+                      </div>
+                    </CardContent>
                   </Card>
                 </div>
               )}
@@ -168,12 +190,14 @@ export const ContentCard = ({
           type={content.type}
           domain={domain}
           link={content.link}
+          cardId = {content._id}
           variant={variant}
           className="w-full p-4"
         />
       </CardHeader>
       <CardContent>
         <EmbeddedCard link={content.link} domain={domain} className="" />
+        {content._id}
       </CardContent>
     </Card>
   );
