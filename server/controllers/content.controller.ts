@@ -34,7 +34,7 @@ export const addContent = async(req : AuthenticatedRequest, res : Response, next
             userId : req.userId
         })
         const saveContent = await content.save();
-        res.status(201).json({message : "Content Added Successfully", content : saveContent});
+        return res.status(201).json({message : "Content Added Successfully", content : saveContent});
     }catch(error) {
         next(error);
     }
@@ -43,7 +43,7 @@ export const addContent = async(req : AuthenticatedRequest, res : Response, next
 export const getContents = async(req : Request, res : Response, next: NextFunction ) => {
     try {
         const contentData = await Content.find({userId : req.userId});
-        res.status(200).json({
+        return res.status(200).json({
             message : "Contents fetched successfully",
             contents : contentData
         })
@@ -55,7 +55,7 @@ export const getContents = async(req : Request, res : Response, next: NextFuncti
 export const getContentsById = async (req : Request, res : Response, next: NextFunction ) => {
     try {
         const foundContent = await Content.findById(req.params.id);
-        res.status(200).json({
+        return res.status(200).json({
             Content: foundContent,
         })
     }catch (error){
@@ -69,10 +69,10 @@ export const updateContent = async(req : Request, res : Response, next: NextFunc
         const updateData = await Content.findByIdAndUpdate(req.params.id, data, {new: true})
 
         if(!updateData){
-            res.status(404).json({message: "Content not found to update"})
+            return res.status(404).json({message: "Content not found to update"})
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             Content : updateData,
         })
     }catch (error) {
@@ -85,9 +85,9 @@ export const deleteContent = async(req : Request, res : Response, next: NextFunc
         const deleteFoundContent = await Content.findByIdAndDelete(req.params.id);
 
         if(!deleteFoundContent){
-            res.status(404).json({message : "Content not fount to delete"})
+            return res.status(404).json({message : "Content not fount to delete"})
         }
-        res.status(300).send("Deleted Successfully");
+        return res.status(200).send("Deleted Successfully");
 
     }catch (error){
         next(error)
