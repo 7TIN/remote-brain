@@ -9,7 +9,7 @@ export const Card = ({className, ...props} : React.ComponentProps<"div">)  => {
 
 export const CardHeader = ({className, ...props} : React.ComponentProps<'div'>) => {
     return (
-        <div className={cn("flex flex-col",className)} {...props} />
+        <div className={cn("flex",className)} {...props} />
     )
 }
 

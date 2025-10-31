@@ -1,9 +1,11 @@
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/Button";
-import { Card } from "./ui/Card";
+import { Card, CardHeader } from "./ui/Card";
 import { Controller, useForm } from "react-hook-form";
 import api from "../lib/api";
+import { useState } from "react";
+import { Icons } from "./ui/Icons";
 
 const FormSchema = z.object({
   link: z.url(),
@@ -30,7 +32,7 @@ async function onSubmit(values: Formvalues) {
   }
 }
 
-const AddContentForm = () => {
+export const AddContentForm = () => {
   const {
     register,
     handleSubmit,
@@ -45,7 +47,7 @@ const AddContentForm = () => {
     },
   });
   return (
-    <Card className="w-sm p-1 border border-neutral-500 max-w-70 bg-neutral-50">
+    <Card className="p-1 border border-neutral-500 max-w-70 bg-neutral-50">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col justify-center items-center gap-4 px-8 p-2 bg-neutral-100/50 rounded-sm shadow-ace ">
           <div className="flex flex-col gap-1 text-md w-full">
@@ -103,4 +105,31 @@ const AddContentForm = () => {
   );
 };
 
-export default AddContentForm;
+export const AddContentFormButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="relative">
+      <div className="relative">
+        <Button
+          text="Add Content"
+          className="rounded-md items-center text-center gap-x-2 hover:bg-neutral-950 bg-neutral-700 px-4 py-2 flex cursor-pointer ring-1 hover:ring-neutral-300"
+          icon={<Icons.plus className="w-5 h-5" />}
+          onClick={() => setIsOpen((o) => !o)}
+        />
+      </div>
+      {isOpen && (
+        <Card className="absolute z-20 p-1 top-14 left-10 border border-neutral-500 max-w-70 bg-white flex flex-col">
+          <CardHeader className="mb-2 border-b py-1 border-neutral-300 flex justify-between">
+            <span className="px-1">Add Content Form</span>
+            <div
+            className="cursor-pointer"
+            onClick={() => setIsOpen((o) => !o)}>
+            <Icons.cross />
+          </div>
+          </CardHeader>
+          <AddContentForm />
+        </Card>
+      )}
+    </div>
+  );
+};

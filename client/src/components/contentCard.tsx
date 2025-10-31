@@ -197,7 +197,6 @@ export const ContentCard = ({
       </CardHeader>
       <CardContent>
         <EmbeddedCard link={content.link} domain={domain} className="" />
-        {content._id}
       </CardContent>
     </Card>
   );

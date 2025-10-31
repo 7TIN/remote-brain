@@ -5,7 +5,7 @@
 // import ShareBrainButton from "../components/ShareBrainButton";
 // import { Button } from "../components/ui/Button";
 // import { Icons } from "../components/ui/Icons";
-import AddContentForm from "../components/AddContentForm";
+import { AddContentForm } from "../components/AddContentForm";
 
 function Home(){
 
